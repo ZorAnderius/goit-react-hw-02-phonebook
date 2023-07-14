@@ -12,8 +12,8 @@ const INITIAL_STATE = {
 export class ContactForm extends Component {
   state = { ...INITIAL_STATE };
 
-  #nameFormID = nanoid();
-  #numberFormID = nanoid();
+  nameFormID = nanoid();
+  numberFormID = nanoid();
 
   handelChange = e => {
     const { name, value } = e.target;
@@ -39,7 +39,7 @@ export class ContactForm extends Component {
       >
         <label
           className={contactFormCSS.contact_label}
-          htmlFor={this.#nameFormID}
+          htmlFor={this.nameFormID}
         >
           Name
         </label>
@@ -49,7 +49,7 @@ export class ContactForm extends Component {
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          id={this.#nameFormID}
+          id={this.nameFormID}
           value={name}
           onChange={this.handelChange}
           required
@@ -57,7 +57,7 @@ export class ContactForm extends Component {
 
         <label
           className={contactFormCSS.contact_label}
-          htmlFor={this.#numberFormID}
+          htmlFor={this.numberFormID}
         >
           Number
         </label>
@@ -65,7 +65,7 @@ export class ContactForm extends Component {
           className={contactFormCSS.contact_number_input}
           type="tel"
           name="number"
-          id={this.#numberFormID}
+          id={this.numberFormID}
           pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           value={number}
