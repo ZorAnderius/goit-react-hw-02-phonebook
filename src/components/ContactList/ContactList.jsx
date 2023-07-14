@@ -1,8 +1,10 @@
+import { Notification } from 'components/Notification/Notification';
 import contactListCSS from './ContactList.module.css';
 import propTypes from 'prop-types';
 
 export const ContactList = ({ filterList, onRemoveItem }) => {
-  return (
+  const isFilterListEmpty = filterList.length;
+  return isFilterListEmpty ? (
     <ul className={contactListCSS.contact_list}>
       {filterList.map(({ id, name, number }) => (
         <li key={id} className={contactListCSS.contact_item}>
@@ -19,6 +21,8 @@ export const ContactList = ({ filterList, onRemoveItem }) => {
         </li>
       ))}
     </ul>
+  ) : (
+    <Notification message="No matches found" />
   );
 };
 
