@@ -11,10 +11,9 @@ import contacts from './contacts_data.json';
 import { Notification } from './Notification/Notification';
 
 let keyOfStorage = true;
+
 const STORAGE_KEY = 'contacts';
-
-let storage = JSON.parse(localStorage.getItem(STORAGE_KEY));
-
+const storage = JSON.parse(localStorage.getItem(STORAGE_KEY));
 const initalArr = storage && storage.length ? storage : contacts;
 
 export class App extends Component {
