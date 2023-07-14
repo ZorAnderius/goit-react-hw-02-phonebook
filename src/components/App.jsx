@@ -8,6 +8,7 @@ import { ContactList } from './ContactList/ContactList';
 import appCSS from './App.module.css';
 
 import contacts from './contacts_data.json';
+import { Notification } from './Notification/Notification';
 
 let keyOfStorage = true;
 const STORAGE_KEY = 'contacts';
@@ -75,6 +76,7 @@ export class App extends Component {
     }
 
     const { filter } = this.state;
+    const contactsCount = this.state.contacts.length;
     const filterList = this.checkSameContact();
     return (
       <div className={appCSS.main_container}>
@@ -90,10 +92,14 @@ export class App extends Component {
           styles={{ title: 'contact-title', container: 'second-container' }}
         >
           <Filter value={filter} filterContacts={this.filterContacts} />
-          <ContactList
-            filterList={filterList}
-            onRemoveItem={this.onRemoveContact}
-          />
+          {contactsCount ? (
+            <ContactList
+              filterList={filterList}
+              onRemoveItem={this.onRemoveContact}
+            />
+          ) : (
+            <Notification message="Phonebook is empty" />
+          )}
         </Section>
       </div>
     );
