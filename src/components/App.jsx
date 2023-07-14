@@ -10,17 +10,15 @@ import appCSS from './App.module.css';
 import contacts from './contacts_data.json';
 
 let keyOfStorage = true;
+const STORAGE_KEY = 'contacts';
+
+let storage = JSON.parse(localStorage.getItem(STORAGE_KEY));
+
+const initalArr = storage && storage.length ? storage : contacts;
 
 export class App extends Component {
-  STORAGE_KEY = 'contacts';
-
-  localStorage = JSON.parse(localStorage.getItem(this.STORAGE_KEY));
-
   state = {
-    contacts:
-      this.localStorage && this.localStorage.length
-        ? this.localStorage
-        : contacts,
+    contacts: initalArr,
     filter: '',
   };
 
@@ -42,7 +40,7 @@ export class App extends Component {
       }
       const newContactsList = [...prevState.contacts, contact];
 
-      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(newContactsList));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(newContactsList));
       return { contacts: newContactsList };
     });
   };
@@ -52,14 +50,14 @@ export class App extends Component {
       const newContactList = prevState.contacts.filter(
         contact => contact.id !== contactID
       );
-      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(newContactList));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(newContactList));
 
       return { contacts: newContactList };
     });
   };
 
   initLocalStorage = () => {
-    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.state.contacts));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(this.state.contacts));
   };
 
   checkSameContact = () => {
